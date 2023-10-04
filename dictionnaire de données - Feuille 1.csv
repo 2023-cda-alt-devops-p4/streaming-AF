@@ -1,0 +1,26 @@
+nom,signifcation,type ,taille,règles
+Id_film,,int,6,auto increment
+Tittle,,varchar,30,
+Duration,,time,,
+ReleaseDate,,date,,
+Id_acteur,,int,6,auto increment
+Name_a,,varchar,20,
+Firstname_a,,varchar,20,
+Birthday,,date,,
+Id_RoleFilm,,int,6,auto increment
+Name_rf,,varchar,20,
+Id_realisateur,,int,6,
+Name_r,,varchar,20,
+Firstname_r,,varchar,20,
+Id_utilisateur,,int,6,auto increment
+Name_u,,varchar,20,
+Firstname_u,,varchar,20,
+Email_u,,varchar,30,
+Password_u,,varchar,30,
+Id_role,,int,6,auto increment
+Name_r,,varchar,20,
+Id_archive,,int,6,auto increment
+Name_ar,,varchar,20,
+Firstname_ar,,varchar,20,
+Email_ar,,varchar,30,
+Password_ar,,varchar,30,
