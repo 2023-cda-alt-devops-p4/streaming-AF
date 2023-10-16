@@ -4,6 +4,8 @@ CREATE TABLE Acteur(
    Name_a VARCHAR(50) NOT NULL,
    Firstname_a VARCHAR(50) NOT NULL,
    Birthday DATE,
+   Create_time_a DATETIME DEFAULT CURRENT_TIMESTAMP,
+   Update_time_a DATETIME ON UPDATE CURRENT_TIMESTAMP,
    PRIMARY KEY(Id_acteur),
    UNIQUE(Name_a),
    UNIQUE(Firstname_a)
@@ -13,6 +15,8 @@ CREATE TABLE Realisateur(
    Id_realisateur INT AUTO_INCREMENT,
    Name_r VARCHAR(50) NOT NULL,
    Firstname_r VARCHAR(50) NOT NULL,
+   Create_time_r DATETIME DEFAULT CURRENT_TIMESTAMP,
+   Update_time_r DATETIME ON UPDATE CURRENT_TIMESTAMP,
    PRIMARY KEY(Id_realisateur),
    UNIQUE(Name_r),
    UNIQUE(Firstname_r)
@@ -37,6 +41,8 @@ CREATE TABLE Film(
    Tittle VARCHAR(50) NOT NULL,
    Duration TIME,
    ReleaseDate DATE,
+   Create_time_f DATETIME DEFAULT CURRENT_TIMESTAMP,
+   Update_time_f DATETIME ON UPDATE CURRENT_TIMESTAMP,
    Id_realisateur INT NOT NULL,
    PRIMARY KEY(Id_film),
    UNIQUE(Tittle),
@@ -49,6 +55,7 @@ CREATE TABLE Utilisateur(
    Firstname_u VARCHAR(50) NOT NULL,
    Email_u VARCHAR(60) NOT NULL,
    Password_u VARCHAR(50) NOT NULL,
+   Create_time_u DATETIME DEFAULT CURRENT_TIMESTAMP,
    Id_role INT NOT NULL,
    PRIMARY KEY(Id_utilisateur),
    UNIQUE(Name_u),
@@ -64,6 +71,7 @@ CREATE TABLE Archive(
    Firstname_ar VARCHAR(50) NOT NULL,
    Email_ar VARCHAR(60) NOT NULL,
    Password_ar VARCHAR(50) NOT NULL,
+   Update_time_ar DATETIME ON UPDATE CURRENT_TIMESTAMP,
    Id_utilisateur INT NOT NULL,
    PRIMARY KEY(Id_archive),
    UNIQUE(Name_ar),
@@ -90,8 +98,6 @@ CREATE TABLE Favorie(
    FOREIGN KEY(Id_film) REFERENCES Film(Id_film),
    FOREIGN KEY(Id_utilisateur) REFERENCES Utilisateur(Id_utilisateur)
 );
-
-
 
 DELIMITER $$
 
@@ -123,6 +129,18 @@ BEGIN
    INSERT INTO Archive(Name_ar, Firstname_ar, Email_ar, Password_ar, Id_utilisateur)
    VALUES(@name, @firstname, @email, @password, old.Id_utilisateur);
 END$$
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE ListeFilmsReal(IN real_id INT)
+BEGIN
+    SELECT Tittle
+    FROM Film
+    INNER JOIN Realisateur ON Film.Id_realisateur = Realisateur.Id_realisateur
+    WHERE Realisateur.Id_realisateur = real_id;
+END//
 
 DELIMITER ;
 
