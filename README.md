@@ -38,7 +38,7 @@ SELECT Tittle FROM Film INNER JOIN Jouer ON Film.Id_film = Jouer.Id_film INNER J
 INSERT INTO Film
     (Tittle, Duration, ReleaseDate, Id_realisateur)
 VALUES
-    ('Film7', '01:14:29', '1973-07-24', 3),
+    ('Film7', '01:14:29', '1973-07-24', 3);
 
 - ajouter un acteur/actrice
 INSERT INTO Acteur
@@ -49,7 +49,7 @@ VALUES
 - modifier un film
 UPDATE Film
 SET Tittle = 'Film2 (2002)'
-WHERE condition id = 2
+WHERE Id_film = 2
 
 - supprimer un acteur/actrice
 DELETE FROM Film
